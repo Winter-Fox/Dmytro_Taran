@@ -24,12 +24,13 @@ namespace WebApi
         {
             if (CheckFileExist())
             {
-                var mem = new MemoryStream(File.ReadAllBytes(fileName));
-                var updated = DropboxClient.Files.UploadAsync("/" + fileName, WriteMode.Overwrite.Instance, body: mem);
-                updated.Wait();
-                var tx = DropboxClient.Sharing.CreateSharedLinkWithSettingsAsync("/" + fileName);
-                tx.Wait();
-                url = tx.Result.Url;
+                // Read file from memory and upload it to the dropbox
+                var memoryStream = new MemoryStream(File.ReadAllBytes(fileName));
+                var uploaded = DropboxClient.Files.UploadAsync("/" + fileName, WriteMode.Overwrite.Instance, body: memoryStream);
+                uploaded.Wait();
+                var sharedLink = DropboxClient.Sharing.CreateSharedLinkWithSettingsAsync("/" + fileName);
+                sharedLink.Wait();
+                url = sharedLink.Result.Url;
             }
         }
 
