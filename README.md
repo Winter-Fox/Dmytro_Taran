@@ -14,8 +14,9 @@
 
 ### Additional info
 1. All of the object files used in this project are located under /WebApi folder
-2. Feature files are located under Feature/WebApiFeature/Features folder
-3. Steps definitions are located under Feature/WebApiFeature/Steps
-4. File which gets uploaded to the Dropbox is located under WebApi/bin/Debug/netcoreapp3.1/FileName.txt 
+2. Factory design pattern was used to create objects
+3. Feature files are located under Feature/WebApiFeature/Features folder
+4. Steps definitions are located under Feature/WebApiFeature/Steps
+5. File which gets uploaded to the Dropbox is located under WebApi/bin/Debug/netcoreapp3.1/FileName.txt 
 
 Have a good day! ^_^
