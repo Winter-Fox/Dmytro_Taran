@@ -17,5 +17,12 @@ namespace WebApi
         public abstract bool CheckFileExist();
         // Method which shows message of operation success
         public abstract void ShowSuccessMessage();
+        
+        
+        // Random Main function so that VS won't complain about it's loss and let's you build solution
+        static void Main(string[] args)
+        {
+            //Pass
+        }
     }
 }
