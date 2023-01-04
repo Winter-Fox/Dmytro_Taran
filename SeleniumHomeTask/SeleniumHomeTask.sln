@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumHomeTask", "SeleniumHomeTask.csproj", "{72899E94-5B4A-4C2C-85D4-2A671F99B874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTask", "..\Features\SeleniumTask\SeleniumTask.csproj", "{CDD05400-E3F1-4311-99CE-B6842CEC2FD1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72899E94-5B4A-4C2C-85D4-2A671F99B874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72899E94-5B4A-4C2C-85D4-2A671F99B874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72899E94-5B4A-4C2C-85D4-2A671F99B874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72899E94-5B4A-4C2C-85D4-2A671F99B874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD05400-E3F1-4311-99CE-B6842CEC2FD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD05400-E3F1-4311-99CE-B6842CEC2FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD05400-E3F1-4311-99CE-B6842CEC2FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD05400-E3F1-4311-99CE-B6842CEC2FD1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00F15B29-354B-40C9-B075-F9FEB162CE70}
+	EndGlobalSection
+EndGlobal
