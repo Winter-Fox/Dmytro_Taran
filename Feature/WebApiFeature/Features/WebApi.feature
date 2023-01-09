@@ -2,18 +2,18 @@
 
 @Upload
 Scenario: Upload file
-	Given check file exists on pc
+	Given check file to upload exists on pc
 	When upload file
-	Then show success message
+	Then file is uploaded to Dropbox
 
 @Metadata
 Scenario: Show file metada
-	Given file exists on Dropbox
+	Given file to chekc metadat on exists on Dropbox
 	When get file metada
-	Then show file metada
+	Then check that metadata is correct
 
 @Delete
 Scenario: Delete file
-	Given file exists on Dropbox
+	Given file to delete exists on Dropbox
 	When delete file
-	Then show delete success message
+	Then file is deleted from Dropbox
