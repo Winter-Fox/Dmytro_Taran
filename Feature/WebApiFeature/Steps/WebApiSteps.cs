@@ -1,42 +1,39 @@
 ﻿using System;
 using TechTalk.SpecFlow;
-using FluentAssertions;
 
 using WebApi;
 
-namespace WebApiFeature.Features
+namespace WebApiFeature.Steps
 {
     [Binding]
     public class WebApiSteps
     {
-        // Dropbox uploader class
-        DropboxUploader dbu = new DropboxUploader();
+        private DropboxUploader dbu = new DropboxUploader();
+        private DropboxFileDeleter dfd = new DropboxFileDeleter();
+        private DropboxFileMetadata dfm = new DropboxFileMetadata();
 
-        [Given(@"check file exists on pc")]
-        public void GivenCheckFileExistsOnPc()
+        [Given(@"check file to upload exists on pc")]
+        public void GivenCheckFileToUploadExistsOnPc()
         {
             dbu.CheckFileExist();
         }
-
+        
+        [Given(@"file to chekc metadat on exists on Dropbox")]
+        public void GivenFileToChekcMetadatOnExistsOnDropbox()
+        {
+            dfm.CheckFileExist();
+        }
+        
+        [Given(@"file to delete exists on Dropbox")]
+        public void GivenFileToDeleteExistsOnDropbox()
+        {
+            dfd.CheckFileExist();
+        }
+        
         [When(@"upload file")]
         public void WhenUploadFile()
         {
             dbu.UploadFile();
-        }
-
-        [Then(@"show success message")]
-        public void ThenShowSuccessMessage()
-        {
-            dbu.ShowSuccessMessage();
-        }
-
-
-        // Get file metadata
-        DropboxFileMetadata dfm = new DropboxFileMetadata();
-        [Given(@"file exists on Dropbox")]
-        public void GivenFileExistsOnDropbox()
-        {
-            dfm.CheckFileExist();
         }
         
         [When(@"get file metada")]
@@ -44,25 +41,31 @@ namespace WebApiFeature.Features
         {
             dfm.GetFileMetadata();
         }
-
-        [Then(@"show file metada")]
-        public void ThenShowFileMetada()
-        {
-            dfm.ShowSuccessMessage();
-        }
-
-        // Delete file
-        DropboxFileDeleter dfd = new DropboxFileDeleter();
+        
         [When(@"delete file")]
         public void WhenDeleteFile()
         {
             dfd.DeleteFile();
         }
         
-        [Then(@"show delete success message")]
-        public void ThenShowDeleteSuccessMessage()
+        [Then(@"file is uploaded to Dropbox")]
+        public void ThenFileIsUploadedToDropbox()
         {
-            dfd.ShowSuccessMessage();
+            dbu.CheckResult().Equals(true);
+        }
+        
+        [Then(@"check that metadata is correct")]
+        public void ThenCheckThatMetadataIsCorrect()
+        {
+            dfm.CheckResult().Equals(true); 
+        }
+        
+        [Then(@"file is deleted from Dropbox")]
+        public void ThenFileIsDeletedFromDropbox()
+        {
+            dfd.CheckResult().Equals(true);
+            // Upload file again to make test work another time
+            dbu.UploadFile(dfd.fileName);
         }
     }
 }
