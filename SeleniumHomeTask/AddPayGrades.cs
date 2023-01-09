@@ -8,7 +8,7 @@ using OpenQA.Selenium.Firefox;
 
 namespace SeleniumHomeTask
 {
-    public class AddPayGrades
+    public class AddPayGrades : BasicPage
     {
         private WebDriver Driver;
         private string MinSalary = "12";
@@ -57,16 +57,16 @@ namespace SeleniumHomeTask
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
 
             // Add new job with VeryRandomName title
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(NameInputXpath)).SendKeys("VeryRandomName");
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SaveJobNameButtonXpath)).Click();
+            SendKeysElem(wait, NameInputXpath, "VeryRandomName");
+            ClickElem(wait, SaveJobNameButtonXpath);
 
             //Add new currency
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(AddCurrencyButtonXpath)).Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SelectCurrencyXpath)).Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(CurrencyXpath)).Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(MinSalaryInputXpath)).SendKeys(MinSalary);
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(MaxSalaryInputXpath)).SendKeys(MaxSalary);
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SaveCurrencyButtonXpath)).Click();
+            ClickElem(wait, AddCurrencyButtonXpath);
+            ClickElem(wait, SelectCurrencyXpath);
+            ClickElem(wait, CurrencyXpath);
+            SendKeysElem(wait, MinSalaryInputXpath, MinSalary);
+            SendKeysElem(wait, MaxSalaryInputXpath, MaxSalary);
+            ClickElem(wait, SaveCurrencyButtonXpath);
         }
 
         public bool IsCurrencyAddedRight()
@@ -83,10 +83,10 @@ namespace SeleniumHomeTask
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
 
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SelectCurrencyButtonXpath)).Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DeleteSelectedButtonXpath)).Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(AmSureButtonXpath)).Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(CancelButtonXpath)).Click();
+            ClickElem(wait, SelectCurrencyButtonXpath);
+            ClickElem(wait, DeleteSelectedButtonXpath);
+            ClickElem(wait, AmSureButtonXpath);
+            ClickElem(wait, CancelButtonXpath);
 
             return new PayGrades(Driver);
         }

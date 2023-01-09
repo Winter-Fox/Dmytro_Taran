@@ -8,7 +8,7 @@ using OpenQA.Selenium.Firefox;
 
 namespace SeleniumHomeTask
 {
-    public class Admin
+    public class Admin : BasicPage
     {
         private WebDriver Driver;
 
@@ -25,8 +25,8 @@ namespace SeleniumHomeTask
         public PayGrades MoveToPayGradesPage()
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(JobsTabXpath)).Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(PayGradesTabXpath)).Click();
+            ClickElem(wait, JobsTabXpath);
+            ClickElem(wait, PayGradesTabXpath);
 
             return new PayGrades(Driver);
         }
