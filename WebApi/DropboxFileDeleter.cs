@@ -6,15 +6,16 @@ namespace WebApi
 {
     public class DropboxFileDeleter : DropboxFactoryClass
     {
+        public string fileName = "FileToDelete.txt";
+
         public override bool CheckFileExist()
         {
-            DropboxFileMetadata dfm = new DropboxFileMetadata();
-            return dfm.CheckFileExist();
+            return CheckFileExistOnDropbox(fileName);
         }
 
-        public override void ShowSuccessMessage()
+        public override bool CheckResult()
         {
-            Console.WriteLine("You succefully deleted file!");
+            return !CheckFileExistOnDropbox(fileName);
         }
 
         public void DeleteFile()
@@ -27,7 +28,9 @@ namespace WebApi
                 {
                     if (item.Name == fileName)
                     {
-                        DropboxClient.Files.DeleteV2Async(item.PathLower);
+                        var task = DropboxClient.Files.DeleteV2Async("/"+fileName);
+                        task.Wait();
+                        return;
                     }
                 }
             }

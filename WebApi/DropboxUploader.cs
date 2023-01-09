@@ -12,6 +12,7 @@ namespace WebApi
     public class DropboxUploader : DropboxFactoryClass
     {
         public string url = "";
+        private string fileName = "FileToUpload.txt";
 
         // Check whether file exists on PC
         public override bool CheckFileExist()
@@ -20,24 +21,23 @@ namespace WebApi
         }
 
         // Upload file to Dropbox
-        public void UploadFile()
+        public void UploadFile(string fileName = "FileToUpload.txt")
         {
             if (CheckFileExist())
             {
-                // Read file from memory and upload it to the dropbox
-                var memoryStream = new MemoryStream(File.ReadAllBytes(fileName));
-                var uploaded = DropboxClient.Files.UploadAsync("/" + fileName, WriteMode.Overwrite.Instance, body: memoryStream);
-                uploaded.Wait();
-                var sharedLink = DropboxClient.Sharing.CreateSharedLinkWithSettingsAsync("/" + fileName);
-                sharedLink.Wait();
-                url = sharedLink.Result.Url;
+                var mem = new MemoryStream(File.ReadAllBytes(fileName));
+                var updated = DropboxClient.Files.UploadAsync("/" + fileName, WriteMode.Overwrite.Instance, body: mem);
+                updated.Wait();
+                var tx = DropboxClient.Sharing.CreateSharedLinkWithSettingsAsync("/" + fileName);
+                tx.Wait();
+                url = tx.Result.Url;
             }
         }
 
-        // Show success message
-        public override void ShowSuccessMessage()
+        // Check for success
+        public override bool CheckResult()
         {
-            Console.WriteLine("File succefully uploaded! You can find it by url: " + url);
+            return CheckFileExistOnDropbox(fileName);
         }
     }
 }

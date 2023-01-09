@@ -11,33 +11,24 @@ namespace WebApi
 {
     public class DropboxFileMetadata : DropboxFactoryClass
     {
+        private string fileName = "FileToCheckMetadata.txt";
         public override bool CheckFileExist()
         {
-            // Upload file and if url is not empty - it is uploaded
-            DropboxUploader dbu = new DropboxUploader();
-            dbu.UploadFile();
-
-            if (dbu.url.Length > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return CheckFileExistOnDropbox(fileName);
         }
 
-        public override void ShowSuccessMessage()
+        public override bool CheckResult()
         {
             Metadata file = GetFileMetadata();
             if (file != null)
             {
-                Console.WriteLine("Metadata was succefully retrieved!");
-                Console.WriteLine("Name: " + file.Name);
-                Console.WriteLine("Path: " + file.PathDisplay);
-                Console.WriteLine("ID: " + file.AsFile.Id);
-                Console.WriteLine("Modified: " + file.AsFile.ClientModified);
-            } 
+                if ((file.Name == fileName) &&
+                    (file.PathDisplay == "/" + fileName) &&
+                    (file.AsFile.Id.StartsWith("id:")) &&
+                    (file.AsFile.ClientModified == new DateTime(2023, 1, 9, 16, 15, 42, DateTimeKind.Local))) return true;
+            }
+
+            return false;
         }
 
         public Metadata GetFileMetadata()
