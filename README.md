@@ -12,6 +12,21 @@
 3. Run WebApi/WebApi.sln file 
 4. Build the solution
 
+### Run more command line
+1. Clone repository to your device
+2. Go to WebApi branch
+3. Run WebApi/WebApi.sln file 
+4. Open Command Prompt
+5. Run *dotnet test [Folder where you cloned project]\Feature\WebApiFeature\bin\Debug\netcoreapp3.1\WebApiFeature.dll*
+
+### Report
+1. Clone repository to your device
+2. Go to WebApi branch
+3. Run WebApi/WebApi.sln file 
+4. Intall LiveDoc from this guide https://docs.specflow.org/projects/specflow-livingdoc/en/latest/LivingDocGenerator/Generating-Documentation.html
+5. Open Command Prompt
+6. Run *livingdoc feature-folder [Folder where you cloned project]\Feature\WebApiFeature\bin\Debug\netcoreapp3.1\WebApiFeature.dll -t [Folder where you cloned project]\Feature\WebApiFeature\bin\Debug\netcoreapp3.1\TestExecution.json*
+
 ### Additional info
 1. All of the object files used in this project are located under /WebApi folder
 2. Factory design pattern was used to create objects
