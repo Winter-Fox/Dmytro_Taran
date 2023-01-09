@@ -9,20 +9,27 @@ namespace WebApi
     public abstract class DropboxFactoryClass
     {
         // Fields universal for every class
-        static private string token = "sl.BWMljq3rQq4NjATptu9eounDJrMSAVbK-pFtUphvyd6OKTl_jGsVxPpzDYMBR0vluY1Vh2ebDptrXGkgx-CulhBMvfcU_3amvoW4ZzFrdX_ALa3h3eNiS_hwlnBWPrBrxh6GgReznzWy";
+        static private string token = "sl.BWlOXLe3EDbiE9gos_Z9LbOBEGM1oV1JnxMVARI_xrPCfTlgIlsl4nVIMmxpDxFtJvWKviUzoGgqww6ZNwY1DIX2tQYjkUu1KxlCcC-oGc_BHsjxhEhRYW7rDqL-OHO_CNpTAjtCahx4";
         public DropboxClient DropboxClient = new DropboxClient(token);
-        public string fileName = @"FileName.txt";
 
         // Mehtod which checks whether file exists (either on PC or on Dropbox)
         public abstract bool CheckFileExist();
         // Method which shows message of operation success
-        public abstract void ShowSuccessMessage();
-        
-        
-        // Random Main function so that VS won't complain about it's loss and let's you build solution
-        static void Main(string[] args)
+        public abstract bool CheckResult();
+
+        // Method which checks whether file with a specified name exists in Dropbox
+        protected bool CheckFileExistOnDropbox(string fileName)
         {
-            //Pass
+            var filesInDropbox = DropboxClient.Files.ListFolderAsync(string.Empty);
+            foreach (var item in filesInDropbox.Result.Entries)
+            {
+                if (item.Name == fileName)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
